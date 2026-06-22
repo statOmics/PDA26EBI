@@ -382,19 +382,22 @@ Click to see details on filtering
 </p><ol type="1">
 <li>Handling overlapping protein groups</li>
 </ol>
-<p>Only use proteotypic proteins</p>
+<p>#Only use proteotypic proteins</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>qf <span class="ot">&lt;-</span> <span class="fu">filterFeatures</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  qf, <span class="sc">~</span> Proteins <span class="sc">!=</span> <span class="st">""</span> <span class="sc">&amp;</span> <span class="do">## Remove failed protein inference</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">";"</span>, Proteins))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>qf2 <span class="ot">&lt;-</span>  <span class="fu">filterFeatures</span>(</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  qf2, <span class="sc">~</span> Proteins <span class="sc">!=</span> <span class="st">""</span> <span class="sc">&amp;</span> <span class="do">## Remove failed protein inference</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">";"</span>, Proteins))</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>qf3 <span class="ot">&lt;-</span>  <span class="fu">filterFeatures</span>(</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  qf3, <span class="sc">~</span> Proteins <span class="sc">!=</span> <span class="st">""</span> <span class="sc">&amp;</span> <span class="do">## Remove failed protein inference</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">";"</span>, Proteins))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  qf, <span class="sc">~</span> Proteins <span class="sc">!=</span> <span class="st">""</span> <span class="co">#&amp; ## Remove failed protein inference</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#!grepl(";", Proteins)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>qf2 <span class="ot">&lt;-</span>  <span class="fu">filterFeatures</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  qf2, <span class="sc">~</span> Proteins <span class="sc">!=</span> <span class="st">""</span> <span class="co">#&amp; ## Remove failed protein inference</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  !grepl(";", Proteins)</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>qf3 <span class="ot">&lt;-</span>  <span class="fu">filterFeatures</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  qf3, <span class="sc">~</span> Proteins <span class="sc">!=</span> <span class="st">""</span> <span class="co"># &amp; ## Remove failed protein inference</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#!grepl(";", Proteins)</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="2" type="1">
 <li>Remove reverse sequences (decoys) and contaminants</li>
@@ -415,7 +418,7 @@ Click to see details on filtering
 </ol>
 <p>We keep peptides that were observed at last twice.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nObs <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nObs <span class="ot">&lt;-</span> <span class="dv">3</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(qf[[<span class="st">"peptides_log"</span>]])</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(qf2[[<span class="st">"peptides_log"</span>]])</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>n3 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(qf3[[<span class="st">"peptides_log"</span>]])</span>
@@ -424,22 +427,22 @@ Click to see details on filtering
 <div class="cell-output cell-output-stdout">
 <pre><code>An instance of class QFeatures (type: bulk) with 2 sets:
 
- [1] peptides_raw: SummarizedExperiment with 50292 rows and 8 columns 
- [2] peptides_log: SummarizedExperiment with 44394 rows and 8 columns </code></pre>
+ [1] peptides_raw: SummarizedExperiment with 52720 rows and 8 columns 
+ [2] peptides_log: SummarizedExperiment with 40822 rows and 8 columns </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(qf2 <span class="ot">&lt;-</span> <span class="fu">filterNA</span>(qf2, <span class="at">i =</span> <span class="st">"peptides_log"</span>, <span class="at">pNA =</span> (n2 <span class="sc">-</span> nObs) <span class="sc">/</span> n2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>An instance of class QFeatures (type: bulk) with 2 sets:
 
- [1] peptides_raw: SummarizedExperiment with 50292 rows and 8 columns 
- [2] peptides_log: SummarizedExperiment with 43346 rows and 8 columns </code></pre>
+ [1] peptides_raw: SummarizedExperiment with 52720 rows and 8 columns 
+ [2] peptides_log: SummarizedExperiment with 39932 rows and 8 columns </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(qf3 <span class="ot">&lt;-</span> <span class="fu">filterNA</span>(qf3, <span class="at">i =</span> <span class="st">"peptides_log"</span>, <span class="at">pNA =</span> (n3 <span class="sc">-</span> nObs) <span class="sc">/</span> n3))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>An instance of class QFeatures (type: bulk) with 2 sets:
 
- [1] peptides_raw: SummarizedExperiment with 50292 rows and 14 columns 
- [2] peptides_log: SummarizedExperiment with 47373 rows and 14 columns </code></pre>
+ [1] peptides_raw: SummarizedExperiment with 52720 rows and 14 columns 
+ [2] peptides_log: SummarizedExperiment with 46201 rows and 14 columns </code></pre>
 </div>
 </div>
 <p></p>
@@ -816,10 +819,10 @@ Click to see code
 <pre><code>Analysis of Variance Table
 
 Response: intensity
-          Df Sum Sq Mean Sq F value   Pr(&gt;F)   
-celltype   1 5.1828  5.1828 148.260 0.001193 **
-mouse      3 1.1708  0.3903  11.165 0.039011 * 
-Residuals  3 0.1049  0.0350                    
+          Df Sum Sq Mean Sq  F value   Pr(&gt;F)   
+celltype   1 5.1780  5.1780 144.0491 0.001244 **
+mouse      3 0.8749  0.2916   8.1127 0.059640 . 
+Residuals  3 0.1078  0.0359                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -829,8 +832,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 
 Response: intensity
           Df Sum Sq Mean Sq F value   Pr(&gt;F)   
-celltype   1 5.1828  5.1828  24.376 0.002611 **
-Residuals  6 1.2757  0.2126                    
+celltype   1 5.1780  5.1780  31.615 0.001352 **
+Residuals  6 0.9827  0.1638                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -840,8 +843,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 
 Response: intensityCRD
           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-celltype   1 6.0660   6.066  36.535 0.0009279 ***
-Residuals  6 0.9962   0.166                      
+celltype   1 5.8564  5.8564  43.269 0.0005922 ***
+Residuals  6 0.8121  0.1354                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>

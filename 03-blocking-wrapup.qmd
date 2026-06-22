@@ -129,20 +129,23 @@ qf3 <- logTransform(qf3, base = 2, i = "peptides_raw", name = "peptides_log")
 
 1. Handling overlapping protein groups
 
-Only use proteotypic proteins
+#Only use proteotypic proteins
 
 ```{r}
 qf <- filterFeatures(
-  qf, ~ Proteins != "" & ## Remove failed protein inference
-    !grepl(";", Proteins))
+  qf, ~ Proteins != "" #& ## Remove failed protein inference
+    #!grepl(";", Proteins)
+  )
 
 qf2 <-  filterFeatures(
-  qf2, ~ Proteins != "" & ## Remove failed protein inference
-    !grepl(";", Proteins))
+  qf2, ~ Proteins != "" #& ## Remove failed protein inference
+  #  !grepl(";", Proteins)
+  )
 
 qf3 <-  filterFeatures(
-  qf3, ~ Proteins != "" & ## Remove failed protein inference
-    !grepl(";", Proteins))
+  qf3, ~ Proteins != "" # & ## Remove failed protein inference
+    #!grepl(";", Proteins)
+  )
 ```
 
 2. Remove reverse sequences (decoys) and contaminants
@@ -165,7 +168,7 @@ qf3 <- filterFeatures(qf3,~ Potential.contaminant != "+")
 We keep peptides that were observed at last twice.
 
 ```{r}
-nObs <- 2
+nObs <- 3
 n1 <- ncol(qf[["peptides_log"]])
 n2 <- ncol(qf2[["peptides_log"]])
 n3 <- ncol(qf3[["peptides_log"]])
