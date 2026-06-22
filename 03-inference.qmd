@@ -406,17 +406,18 @@ allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 The family-wise error rate (FWER) addresses the multiple testing issue by no longer controlling the individual type I error for each protein, instead it controls:  
 
-\[
-   \text{FWER} = 
-   \text{P}\left[FP \geq 1 \right].
-\]
+$$
+\text{FWER} = \text{P}\left[FP \geq 1 \right]
+$$
 
 The Bonferroni method is widely used to control the type I error: 
 
-- assess each test at 
-\[\alpha_\text{adj}=\frac{\alpha}{m}\]
+- assess each test at $$\alpha_\text{adj}=\frac{\alpha}{m}$$
+
+ 
 - or use adjusted p-values and compare them to $\alpha$: 
-\[p_\text{adj}=\text{min}\left(p \times m,1\right)\]
+$$p_\text{adj}=\text{min}\left(p \times m,1\right)$$
+
 
 Problem, the method is very conservative! 
 

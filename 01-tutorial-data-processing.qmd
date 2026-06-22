@@ -34,7 +34,7 @@ centers all samples (columns) so that they all match the grand median by subtrac
 
 [1.c] Repeat the analysis starting from the `Precursor.Normalised` column. What do you observe? Are all data processing steps needed?
 
-[1.d] Repeat the analysis, again use the basis script with median normalisation factors (`nf_log_med` function). First change the summarisation with the `aggregateFeatures` function by replacing maxLFQ with median polish (`fun = MsCoreUtils::medianPolish`), then use simple median summarisation (`fun = matrixStats::colMedians`).  (Note, that you also have to add an additional argument for median polish and median summarisation to handle missing values, i.e. add an additional argument `na.rm = TRUE`, i.e. replace `fun = function(X) iq::maxLFQ(X)$estimate` with `fun = MsCoreUtils::medianPolish, na.rm = TRUE`). What do you observe and try to explain this. 
+[1.d] Repeat the analysis, again use the basis script with median normalisation factors (`nf_log_med` function). First change the summarisation with the `aggregateFeatures` function by replacing maxLFQ with median polish (`fun = MsCoreUtils::medianPolish`), then use simple median summarisation (`fun = matrixStats::colMedians`).  (Note, that you also have to add an additional argument for median polish and median summarisation to handle missing values, i.e. add an additional argument `na.rm = TRUE`, i.e. replace `fun = function(X) iq::maxLFQ(X)$estimate` with `fun = function(X) MsCoreUtils::medianPolish(X, na.rm = TRUE`). What do you observe and try to explain this. 
 
 # Breast cancer example
 

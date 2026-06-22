@@ -532,10 +532,12 @@ Here, we will evaluate three popular summarisation methods.
 2. median polish
 3. median summarisation
 
+
 1. maxLFQ summarise the precursor-level data into protein intensities using maxLFQ. 
 maxLFQ first calculates all pairwise log ratio's between samples only using their shared precursors.
-Particularly, it uses the median of the log ratio's between the shared precursors s, i.e. 
+Particularly, it uses the median of the log ratio's between the shared precursors, i.e. 
 $$r_{ij} = median(y_{sj}-y_{si})$$.  
+
 Hence, it first eliminates peptide effects. 
 It then estimates the summaries by solving 
 
