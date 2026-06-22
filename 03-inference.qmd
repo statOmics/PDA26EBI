@@ -25,21 +25,21 @@ The modeling concepts, however, are also applicable to DIA data.
 ---
 
 
-<iframe width="560" height="315"
+<details><summary> Movie clip </summary><p><iframe width="560" height="315"
 src="https://www.youtube.com/embed/1mhg3BCuEm8"
 frameborder="0"
 style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 
 # Francisella tularensis experiment
 
 
-<iframe width="560" height="315"
+<details><summary> Movie clip </summary><p><iframe width="560" height="315"
 src="https://www.youtube.com/embed/TW5rk1y7aOc"
 frameborder="0"
 style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 
 ```{r echo=FALSE,out.width="50%"}
@@ -242,11 +242,11 @@ qf[["proteins"]] |>
 ### Hypothesis testing: a single protein 
 
 
-<iframe width="560" height="315"
+<details><summary> Movie clip </summary><p><iframe width="560" height="315"
 src="https://www.youtube.com/embed/myP6SUlSwsM"
 frameborder="0"
 style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 
 ```{r echo=FALSE}
@@ -376,11 +376,11 @@ The p-value will only be calculated correctly if the underlying assumptions hold
 ## Multiple hypothesis testing
 
 
-<iframe width="560" height="315"
+<details><summary> Movie clip </summary><p><iframe width="560" height="315"
 src="https://www.youtube.com/embed/cLn-CFyA6ps"
 frameborder="0"
 style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 
 - Consider testing DA for all $m=1066$ proteins simultaneously
@@ -398,11 +398,11 @@ $\rightarrow$ Hence, we are bound to call many false positive proteins each time
 
 #### Family-wise error rate
 
-<iframe width="560" height="315"
+<details><summary> Movie clip </summary><p><iframe width="560" height="315"
 src="https://www.youtube.com/embed/IL_eUSyRDRA"
 frameborder="0"
 style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 The family-wise error rate (FWER) addresses the multiple testing issue by no longer controlling the individual type I error for each protein, instead it controls:  
 
@@ -423,11 +423,11 @@ Problem, the method is very conservative!
 #### False discovery rate
 
 
-<iframe width="560" height="315"
+<details><summary> Movie clip </summary><p><iframe width="560" height="315"
 src="https://www.youtube.com/embed/envDqvEwRcc"
 frameborder="0"
 style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 
 - FDR: Expected proportion of false positives on the total number of positives you return.
@@ -496,11 +496,11 @@ The adjusted $p$-value (also known as the $q$-value in FDR literature):
 #### Francisella Example
 
 
-<iframe width="560" height="315"
+<details><summary> Movie clip </summary><p><iframe width="560" height="315"
 src="https://www.youtube.com/embed/B3BmnOLkYg4"
 frameborder="0"
 style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 <details><summary> Click to see code </summary><p>
 ```{r}
@@ -560,11 +560,11 @@ volcanoT
 ## Moderated Statistics
 
 
-<iframe width="560" height="315"
+<details><summary> Movie clip </summary><p><iframe width="560" height="315"
 src="https://www.youtube.com/embed/_Q11LXDy0xU"
 frameborder="0"
 style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 
 Problems with ordinary t-test
@@ -829,11 +829,11 @@ for (protName in sigNames)
 ## Sample size 
 
 
-<iframe width="560" height="315"
+<details><summary> Movie clip </summary><p><iframe width="560" height="315"
 src="https://www.youtube.com/embed/uELgkzDjVRY"
 frameborder="0"
 style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p></details>
 
 
 $$
