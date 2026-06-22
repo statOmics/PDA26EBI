@@ -6,12 +6,12 @@ Largely adapted from chapter "Statistical analysis with msqrob2" in msqrob2book 
 
 Note, that learners who are following the course by using the interactive 
 msqrob2gui APPs can largely ignore the code in this document. The code is here for 
-their reference so that they could progress there coding skills in the future so 
+their reference so that they could progress their coding skills in the future so 
 as to exploit the full power of msqrob2 to develop and automate reproducible 
 data analysis workflows. 
 
 Note, however, that the definition of the models and the contrasts in 
-sections {#sec-modeling} and {#sec-inference} are useful for all users as these 
+sections @sec-modeling and @sec-inference are useful for all users as these 
 also have to be defined in our interactive Apps. 
 
 ```{r, echo = FALSE}
@@ -80,7 +80,7 @@ knitr::include_graphics("figs/lfq_workflow.png")
 
 $\rightarrow$ Unbalanced pepide identifications across samples and messy data
 
-## Data Dependent Acquisition 
+## Data Independent Acquisition 
 
 With data independent acquisition, however, the second round
 of MS (MS2) does not record fragmented ions for selected ions. 
@@ -136,7 +136,7 @@ protein.
 - The identification step is not trivial and prone to 
 errors^[Improving peptide identification is outside the scope of
 this tutorial]. PSM misidentification leads to the assignment of a
-quantitative values from another peptide with likely another
+quantitative value from another peptide with likely another
 ionisation efficiency and relative abundance. Hence this misassigned
 values often lead to outliers.
 - Moreover, there is a widespread data missingness, which is often related to the
@@ -536,7 +536,7 @@ It can be shown that filtering will not induce bias results when the filtering c
 ### Assay joining
 
 Up to now, the data from different runs were kept in separate assays. We can now join the normalised sets into an precursor set using joinAssays(). Sets are joined by stacking the columns (samples) in a matrix and rows (features) are matched according to a row identifier, here the `Precursor.Id`.
-We will store the result in the assay with name: `precursor`.
+We will store the result in the assay with name: `precursors`.
 
 <details><summary> Click to see code </summary><p>
 ```{r}
@@ -590,7 +590,7 @@ Here, we remove proteins that can only be found by one peptide, as such proteins
 
 1. We first calculate how many distinct peptides map to each protein (`Protein.Group`). We use the stripped precursor sequence, i.e. sequence of the base peptide for this purpose. 
 
-2. We store this information in the row data of the precursors assay
+2. We store this information in the row data of the precursors assay.
 
 3. We filter precursors of one-hit wonder proteins.  
 
