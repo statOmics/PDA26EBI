@@ -86,7 +86,7 @@ of the R for mass spectrometry book.
 # Software and data
 
 To install all the necessary package, please use
-**R 4.6 or higher** and execute the code chunk below on the command line:
+**R 4.6 or higher** and execute the code chunk below in the RStudio Console/R console:
 
 ```{r, eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE))
