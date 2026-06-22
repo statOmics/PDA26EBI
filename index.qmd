@@ -1,11 +1,11 @@
 ---
-title: Proteomics Data Analysis for Data-independent acquisition (PDA-DIA) 
+title: Proteomics Data Analysis for Data-dependent and Data-independent acquisition at EBI 2026 (PDA26EBI) 
 code-tools: false
 ---
 
 This course provides comprehensive hands-on tutorials on how to apply the
 `msqrob2` software for the statistical analysis of mass spectrometry
-(MS)-based proteomics data. It has a particular focus on data dependent acquisition.  
+(MS)-based proteomics data.  
 The course first introduces general concepts of
 statistical proteomics data analysis and `msqrob2`. Further
 chapters will demonstrate the application of `msqrob2` for assessing
@@ -71,17 +71,29 @@ The course material is targeted to either proteomics practitioners or
 data analysts/bioinformaticians that would like to learn how to
 analyse proteomics data. 
 
-A working knowledge of R (R syntax, commonly used functions, basic
-data structures such as data frames, vectors, matrices, ... and their
-manipulation) is required. Familiarity with MS or proteomics in
+Familiarity with MS or proteomics in
 general is recommended, this would allow for a better understanding of
-the modelling assumptions taken throughout this book. Familiarity with
-other Bioconductor omics data classes and the tidyverse syntax is
+the modelling assumptions taken throughout this course. 
+
+The course is available in two different tracks.
+
+1. Using a graphical user interface. Here, there is a focus on general modeling concepts for proteomics data analysis.  
+2. Using Rmarkdown/Quarto scripts. In this track, learners will learn both the general modeling concepts as well as how to implement these concepts in the R/Bioconductor coding language.
+
+For learning that want to follow the course using scripts: 
+
+- A working knowledge of R (R syntax, commonly used functions, basic
+data structures such as data frames, vectors, matrices, ... and their
+manipulation) is required for . 
+
+- Familiarity with other Bioconductor omics data classes and the tidyverse syntax is
 useful.
 
-We **highly recommend** reading the [quantitative proteomics
+- We recommend reading the [quantitative proteomics
 chapter](https://rformassspectrometry.github.io/book/sec-quant.html)
 of the R for mass spectrometry book.
+
+- We **highly recommend** reading our msqrob2book for more in dept modeling concepts and case studies [msqrob2book](https://statomics.github.io/msqrob2book).
 
 # Software and data
 
