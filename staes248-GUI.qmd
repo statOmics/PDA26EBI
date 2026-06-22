@@ -42,8 +42,8 @@ Examples on our peptide-based workflows and on the analysis of more complex
 designs can be found on our companion website 
 [msqrob2 book](https://statomics.github.io/msqrob2book).
 
-Technical details on our methods can be found in [@goeminne2016], 
-[@goeminne2020], [@sticker2020] and [@vandenbulcke2025].
+Technical details on our methods can be found in [@goeminne2016-tr], 
+[@Goeminne2020], [@sticker2020-rl] and [@Vandenbulcke2025-sj].
 
 # Background
 
@@ -56,7 +56,7 @@ Two different spike-in concentrations were used:
 6A (0.25 fmol UPS1 proteins/$\mu$L) and 6B (0.74 fmol UPS1 proteins/$\mu$L) [5].
 We limited ourselves to the data of LTQ-Orbitrap W at site 56.
 The data were searched with MaxQuant version 1.5.2.8, and
-detailed search settings were described in Goeminne et al. (2016) [1].
+detailed search settings were described in @goeminne2016-tr.
 Three replicates are available for each concentration.
 
 
@@ -112,7 +112,7 @@ have a `QFeatures` object that you want to explore interactively.
 
 # Data preprocessing
 
-Before analysing the data, we have perform data preprocessing. This to ensure 
+Before analysing the data, we have to perform data preprocessing. This to ensure 
 the data meet our model assumptions. 
 
 ## Import the data
@@ -184,9 +184,9 @@ and data aggregation as we indicated that we imported data from DIA-NN software.
 ![Figure 6. Data Processing 2](./figs/dataprocessing2.png)
 
 
-1. First we can resture the QFeatures object from import. This is something that 
-we always have do if we change the data processing settings and want to redo the 
-datas processing. 
+1. First we can restore the QFeatures object from import. This is something that 
+we always have to do if we change the data processing settings and want to redo the 
+data processing. 
 
 2. We can convert zeros to NA. This is important. Many softwares encode missing 
 data with 0 intensity. If we want to address missingness and/or want to log-transfrom
@@ -281,11 +281,11 @@ We will now model the data at the protein level.
 1. We select the `protein_filter_na` set in `Select Assay`
 2. We can model the sources of variation in the data using the variables in the annotation file. 
    In this experimental design, we can model a single source of variation: spike-in concentration8. All remaining sources of variability, e.g. pipetting errors, MS run to run variability, etc will be lumped in the residual variability (error term). We can do this by using the variable condition. 
-   We have to defien a model formula for that. The model always starts with `~`. So we type `~ condition` in the `Design formula`. Note, that you can copy and paste the variable names that are listed below Build Model to avoid typing errors.
+   We have to define a model formula for that. The model always starts with `~`. So we type `~ condition` in the `Design formula`. Note, that you can copy and paste the variable names that are listed below Build Model to avoid typing errors.
 3. We can set the option `Ridge regression for fixed effects`, which is by default set at `No`. Ridge regression can stabilize the estimation of the model parameters. However, we only advice that for designs with many model parameters. 
 4. We can set the option `Robust regression for fixed effects`, which is by default set at `Yes`. This robustifies the parameter estimation against outliers, which often occur in proteomics data. 
 5. As soon as a valid model is formulated you will see that a plot appears under 
-   Visualize Design. The plot shows the different means that are modeled. Here we see that 
+   Visualize Design. The plot shows the different means that are modeled. 
 6. *Do not forget to hit the `Fit Model!`* button to fit the model for each feature of the selected assay.
 
 ![Figure 13. Model 1](./figs/model1.png)
@@ -360,6 +360,8 @@ in modeling with msqrob2 can also be found in our online e-book [msqrob2book](ht
 ![Figure 21. Report 2](./figs/report2.png)
 
 ![Figure 22. Report 3](./figs/report3.png)
+
+
 # Explore with altSEE tab
 
 You can also explore the results interactively. 
@@ -369,7 +371,7 @@ You can also explore the results interactively.
 3. Optionally you can select the variable that will be used in the X-axis of the plots when starting the app (they can be changed in the app). Here, we choose the variable `sampleId`
 4.  Optionally you can select the column that can link features between the Main experiment and the Alt experiment. Here, that is the `Protein.Group` that was used for aggregation. 
 5. We hit the Launch iSEE button and a novel app will be prepared. That typically takes a while.
-6. Once you see `Ready. Refresh the iSEE tab after re-launching, you can clikc the link and that will open the iSEE app in a new browser window. Again this can take a while. 
+6. Once you see `Ready. Refresh the iSEE tab after re-launching, you can click the link and that will open the iSEE app in a new browser window. Again this can take a while. 
 
 ![Figure 23. AltSee 1](./figs/altSEE1.png)
 
@@ -378,7 +380,7 @@ You can also explore the results interactively.
 Once the iSEE app is open, we can interactively explore the data. 
 
 1. The top panels show the reduced dimension plots for both the main and alt experiment. 
-Note, that you can change the alt experiment, under data parameters if you want to explore other assays. 
+Note, that you can change the alt experiment, under data parameters, if you want to explore other assays. 
 
 ![Figure 25. AltSee 0](./figs/altSEE0.png)
 

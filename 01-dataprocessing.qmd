@@ -6,12 +6,12 @@ Largely adapted from chapter "Statistical analysis with msqrob2" in msqrob2book 
 
 Note, that learners who are following the course by using the interactive 
 msqrob2gui APPs can largely ignore the code in this document. The code is here for 
-their reference so that they could progress there coding skills in the future so 
+their reference so that they could progress their coding skills in the future so 
 as to exploit the full power of msqrob2 to develop and automate reproducible 
 data analysis workflows. 
 
 Note, however, that the definition of the models and the contrasts in 
-sections {#sec-modeling} and {#sec-inference} are useful for all users as these 
+sections @sec-modeling and @sec-inference are useful for all users as these 
 also have to be defined in our interactive Apps. 
 
 ```{r, echo = FALSE}
@@ -80,7 +80,7 @@ knitr::include_graphics("figs/lfq_workflow.png")
 
 $\rightarrow$ Unbalanced pepide identifications across samples and messy data
 
-## Data Dependent Acquisition 
+## Data Independent Acquisition 
 
 With data independent acquisition, however, the second round
 of MS (MS2) does not record fragmented ions for selected ions. 
@@ -136,7 +136,7 @@ protein.
 - The identification step is not trivial and prone to 
 errors^[Improving peptide identification is outside the scope of
 this tutorial]. PSM misidentification leads to the assignment of a
-quantitative values from another peptide with likely another
+quantitative value from another peptide with likely another
 ionisation efficiency and relative abundance. Hence this misassigned
 values often lead to outliers.
 - Moreover, there is a widespread data missingness, which is often related to the
@@ -536,7 +536,7 @@ It can be shown that filtering will not induce bias results when the filtering c
 ### Assay joining
 
 Up to now, the data from different runs were kept in separate assays. We can now join the normalised sets into an precursor set using joinAssays(). Sets are joined by stacking the columns (samples) in a matrix and rows (features) are matched according to a row identifier, here the `Precursor.Id`.
-We will store the result in the assay with name: `precursor`.
+We will store the result in the assay with name: `precursors`.
 
 <details><summary> Click to see code </summary><p>
 ```{r}
@@ -590,7 +590,7 @@ Here, we remove proteins that can only be found by one peptide, as such proteins
 
 1. We first calculate how many distinct peptides map to each protein (`Protein.Group`). We use the stripped precursor sequence, i.e. sequence of the base peptide for this purpose. 
 
-2. We store this information in the row data of the precursors assay
+2. We store this information in the row data of the precursors assay.
 
 3. We filter precursors of one-hit wonder proteins.  
 
@@ -752,16 +752,16 @@ developed for RNA-seq data analysis and can also correct for differences in
 composition of the proteomes in the different samples. 
 The method first calculates pseudo-reference sample (row-wise mean of log2 
 intensities, which corresponds to the log2 transformed geometric mean).
-THen calculates log2 ratios of each sample w.r.t. the pseudo-reference.
+Then calculates log2 ratios of each sample w.r.t. the pseudo-reference.
 Finally the column wise median of these log2 ratios is taken to obtain 
 the sample based normalisation factor on the log2 scale.
 This procedure is implemented in the `msqrob2` function `nfLogMedianOfRatios`.
 
 1. We calculate the log transformed normalisation factor from the Median of 
-Ratios method
+Ratios method.
 2.  Subtract these log2-norm factors from the intensities of each corresponding 
 column of the assay data and store the result in the new assay peptides_norm. 
-(We adopt the sweep function to the `peptides_log` assay of the spikein 
+(We adopt the sweep function to the `precursors_log` assay of the spikein 
 QFeatures object with as statistic the log2 normfactor `STATS = nfLog` the 
 default function `FUN = "-"`, `MARGIN = 2` to substract the column wise log2 
 norm factor from each entry of the corresponding assay data).
@@ -1231,10 +1231,9 @@ that is not captured by the fixed effects. Note that $\mathbf{x}_i$
 allows for a flexible parameterisation of the treatment beyond a
 single covariate, i.e. including a 1 for the intercept, continuous and
 categorical variables as well as their interactions. We assume the
-residuals to be independent and identically distributed (i.i.d)
-according to a normal distribution with zero mean and constant
-variance, i.e. $\epsilon_{i} \sim N(0,\sigma_\epsilon^2)$, that can
-differ from protein to protein.
+residuals to be independent and to follow a normal distribution with zero mean and 
+variance that can
+differ from protein to protein, i.e. $\epsilon_{i} \sim N(0,\sigma_{\epsilon_i}^2)$.
 
 In R, this model is encoded using the following simple formula^[We
 don't need to specify the intercept as R automatically adds it during
@@ -1309,7 +1308,13 @@ vd$plotlist
 
 This plot shows that the average protein $\log_2$ intensity for condition2 is modelled by `(Intercept)`, for the `condition4` group by `(Intercept) + condtion4` and for the `condition8` group by `(Intercept) + condtion8`.
  
-Hence, to assess differential abundance of proteins between spike-in conditions, we will have to assess all pairwise combinations between the spike-in groups, which leads to 3 different contrasts, i.e. the log2 fold change between ratio 4 and ratio 2, $\log_2 FC_{4-2} = (Intercept + condition4) - Intercept = condition4$, the log2 fold change between ratio 8 and ratio 2, $\log_2 FC_{8-2} = (Intercept + condition8) - Intercept = condition8$, and the log2 fold change between ratio 8 and ratio 4, $\log_2 FC_{8-4} = (Intercept + condition8) - (Intercept+condition4) = condition8 - condition4$. 
+Hence, to assess differential abundance of proteins between spike-in conditions, we will have to assess all pairwise combinations between the spike-in groups, which leads to 3 different contrasts:
+
+- the log2 fold change between ratio 4 and ratio 2, $\log_2 FC_{4-2} = (Intercept + condition4) - Intercept = condition4$.
+
+- the log2 fold change between ratio 8 and ratio 2, $\log_2 FC_{8-2} = (Intercept + condition8) - Intercept = condition8$.
+
+- the log2 fold change between ratio 8 and ratio 4, $\log_2 FC_{8-4} = (Intercept + condition8) - (Intercept+condition4) = condition8 - condition4$. 
 
 ### Hypothesis testing 
 
