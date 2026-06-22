@@ -24,7 +24,23 @@ The modeling concepts, however, are also applicable to DIA data.
 
 ---
 
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/1mhg3BCuEm8"
+frameborder="0"
+style="display: block; margin: auto;"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
 # Francisella tularensis experiment
+
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/TW5rk1y7aOc"
+frameborder="0"
+style="display: block; margin: auto;"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 ```{r echo=FALSE,out.width="50%"}
 knitr::include_graphics("./figs/francisella.jpg")
@@ -43,13 +59,6 @@ knitr::include_graphics("./figs/tularemia_lesion.jpg")
 
 
 ## Import the data in R 
-
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/2Ljd95IE_AY"
-frameborder="0"
-style="display: block; margin: auto;"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 
 <details><summary> Click to see code </summary><p>
 1. Load libraries 
@@ -232,6 +241,14 @@ qf[["proteins"]] |>
 
 ### Hypothesis testing: a single protein 
 
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/myP6SUlSwsM"
+frameborder="0"
+style="display: block; margin: auto;"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
 ```{r echo=FALSE}
 if ("pi"%in%ls()) rm("pi")
 kopvoeter<-function(x,y,angle=0,l=.2,cex.dot=.5,pch=19,col="black")
@@ -358,6 +375,14 @@ The p-value will only be calculated correctly if the underlying assumptions hold
 
 ## Multiple hypothesis testing
 
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/cLn-CFyA6ps"
+frameborder="0"
+style="display: block; margin: auto;"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
 - Consider testing DA for all $m=1066$ proteins simultaneously
 - What if we assess each individual test at level $\alpha$?
 $\rightarrow$ Probability to have a false positive (FP) among all m simultatenous
@@ -371,7 +396,39 @@ $\rightarrow$ Hence, we are bound to call many false positive proteins each time
 
 ### Multiple testing
 
+#### Family-wise error rate
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/IL_eUSyRDRA"
+frameborder="0"
+style="display: block; margin: auto;"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+The family-wise error rate (FWER) addresses the multiple testing issue by no longer controlling the individual type I error for each protein, instead it controls:  
+
+\[
+   \text{FWER} = 
+   \text{P}\left[FP \geq 1 \right].
+\]
+
+The Bonferroni method is widely used to control the type I error: 
+
+- assess each test at 
+\[\alpha_\text{adj}=\frac{\alpha}{m}\]
+- or use adjusted p-values and compare them to $\alpha$: 
+\[p_\text{adj}=\text{min}\left(p \times m,1\right)\]
+
+Problem, the method is very conservative! 
+
 #### False discovery rate
+
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/envDqvEwRcc"
+frameborder="0"
+style="display: block; margin: auto;"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 - FDR: Expected proportion of false positives on the total number of positives you return.
 - An FDR of 1% means that on average we expect 1% false positive proteins in the list of proteins that are called significant.
@@ -438,6 +495,13 @@ The adjusted $p$-value (also known as the $q$-value in FDR literature):
 
 #### Francisella Example
 
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/B3BmnOLkYg4"
+frameborder="0"
+style="display: block; margin: auto;"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 <details><summary> Click to see code </summary><p>
 ```{r}
 ttestMx <- function(y,group) {
@@ -494,6 +558,14 @@ volcanoT
 ```
 
 ## Moderated Statistics
+
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/_Q11LXDy0xU"
+frameborder="0"
+style="display: block; margin: auto;"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 Problems with ordinary t-test
 
@@ -756,6 +828,14 @@ for (protName in sigNames)
 
 ## Sample size 
 
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/uELgkzDjVRY"
+frameborder="0"
+style="display: block; margin: auto;"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
 $$
  \log_2 \text{FC} = \bar{y}_{p1}-\bar{y}_{p2}
 $$
@@ -778,7 +858,8 @@ $\rightarrow$ if number of bio-repeats increases we have a higher power!
 
 - cfr. Study of tamoxifen treated Estrogen Recepter (ER) positive breast cancer patients
 
-## Blocking 
+## Randomized complete block designs
+
 
 
 $$\sigma^2= \sigma^2_{bio}+\sigma^2_\text{lab} +\sigma^2_\text{extraction} + \sigma^2_\text{run} + \ldots$$
@@ -791,7 +872,7 @@ $$\sigma^2= \sigma^2_{bio}+\sigma^2_\text{lab} +\sigma^2_\text{extraction} + \si
 [https://www.nature.com/articles/nmeth.3005.pdf](https://www.nature.com/articles/nmeth.3005.pdf)
 
 
-## Mouse example 
+### Mouse example 
 
 ```{r echo=FALSE, out.width="50%"}
 knitr::include_graphics("./figs/mouseTcell_RCB_design.png")
