@@ -1,0 +1,142 @@
+---
+title: Proteomics Data Analysis for Data-independent acquisition (PDA-DIA) 
+code-tools: false
+---
+
+This course provides comprehensive hands-on tutorials on how to apply the
+`msqrob2` software for the statistical analysis of mass spectrometry
+(MS)-based proteomics data. It has a particular focus on data dependent acquisition.  
+The course first introduces general concepts of
+statistical proteomics data analysis and `msqrob2`. Further
+chapters will demonstrate the application of `msqrob2` for assessing
+different biological questions starting from datasets with different
+experimental designs, acquisition strategies, instruments, and search
+engines. The book aims to help proteomics researchers and data analysists tailoring their statistical analysis workflow to their specific datasets and research questions.
+
+```{r, echo = FALSE, out.width = "30%", fig.cap = "The sticker is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/)."}
+knitr::include_graphics("figs/msqrob2.png")
+```
+
+# Why msqrob2? {-}
+
+MS-based proteomics experiments often imposes a complex correlation
+structure among observations. Addressing this correlation is key for
+correct statistical inference and reliable biomarker discovery. This
+`msqrob2` course provides a set of model-based workflows
+dedicated to differential abundance analysis for label-free as well
+as labeled MS-based proteomics data. The key features of `msqrob2`
+workflows are:
+
+1. Modularity: all core functions rely on the `QFeatures` class, a
+   standardised data structure, meaning that output of a function can
+   be fed as input to any other function. Hence, different functions
+   are assembled as modular blocks into a complete data analysis
+   workflows that can be easily adapted to the peculiarities of any
+   MS-based proteomics data set. Therefore, the approach extends well
+   beyond the use case presented in this chapter
+2. Flexibility: the `msqrob2` modelling approach relies on the
+   `lme4::lmer()` model specification syntax, meaning that any linear
+   model can be specified. For fixed effects, this includes modelling
+   categorical and numerical variables, as well as their interaction.
+   Moreover, `msqrob2` can model both sample-specific and
+   feature-specific (e.g. peptide or protein) covariates, which
+   unlocks the inference to experiments with arbitrarily complex
+   designs as well as to correct explicitly for feature-specific
+   properties.
+3. Performance: thanks to the inclusion of robust ridge regression, we
+   demonstrated improved performance of `msqrob2` workflows upon the
+   competing software [@Goeminne2016-tr;@Sticker2020-rl;@Vandenbulcke2025-sj].
+
+# Outline {-}
+
+The course is divided in two parts.
+
+# Data Processing
+
+This parts introduces the user to the key concepts for data processing in differential proteomics data analysis and provides extensive description of the code. While this part is conceptual, the concepts are illustrated using a real spike-in study.
+
+-  [Basic concepts](01-dataprocessing.html)
+-  [Tutorial data processing](01-tutorial-data-processing.html)
+-  [Wrap-up data processing](02-workflow-optimisation.html)
+
+# Statistical Inference & Design concepts
+
+- [Basics of Statistical Inference](03-inference.html)
+- [Tutorial Differential Analysis and Design Aspects](03-tutorial-Design.html)
+- [Wrapup Blocking](03-blocking-wrapup.html)
+
+# Targeted audience and assumed background
+
+The course material is targeted to either proteomics practitioners or
+data analysts/bioinformaticians that would like to learn how to
+analyse proteomics data. 
+
+A working knowledge of R (R syntax, commonly used functions, basic
+data structures such as data frames, vectors, matrices, ... and their
+manipulation) is required. Familiarity with MS or proteomics in
+general is recommended, this would allow for a better understanding of
+the modelling assumptions taken throughout this book. Familiarity with
+other Bioconductor omics data classes and the tidyverse syntax is
+useful.
+
+We **highly recommend** reading the [quantitative proteomics
+chapter](https://rformassspectrometry.github.io/book/sec-quant.html)
+of the R for mass spectrometry book.
+
+# Software and data
+
+To install all the necessary package, please use
+**R 4.6 or higher** and execute the code chunk below on the command line:
+
+```{r, eval = FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(c(
+   "arrow",
+   "BiocParallel",
+   "BiocFileCache",
+   "ComplexHeatmap",
+   "dplyr",
+   "ExploreModelMatrix",
+   "ggpattern",
+   "ggplot2",
+   "ggrepel",
+   "impute",
+   "MsDataHub",
+   "patchwork",
+   "scater",
+   "tidyr",
+   "bookdown", 
+   "iq",
+   "QFeatures",
+   "msqrob2",
+   "kableExtra",
+   "data.table",
+   "ggcorrplot",
+   "ggpubr"
+))
+```
+
+Users that would like to make use of the msqrob2gui should also install:
+
+```{r, eval = FALSE}
+BiocManager::install("remotes")
+BiocManager::install("statomics/msqrob2gui")
+```
+
+All data for this course can be directly accessed from the web [msqrob2data](https://github.com/statOmics/msqrob2data) if you use R scripting 
+or can be downloaded locally: [Download data](https://github.com/statOmics/msqrob2data/archive/refs/heads/main.zip)
+
+## License {-}
+
+<a rel="license"
+href="http://creativecommons.org/licenses/by-sa/4.0/"><img
+alt="Creative Commons Licence" style="border-width:0"
+src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br
+/>This material is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+Attribution-ShareAlike 4.0 International License</a>. You are free to
+**share** (copy and redistribute the material in any medium or format)
+and **adapt** (remix, transform, and build upon the material) for any
+purpose, even commercially, as long as you give appropriate credit and
+distribute your contributions under the same license as the original.

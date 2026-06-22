@@ -1,0 +1,55 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  favicon: figs/msqrob2.png
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - text: "Topics"
+        icon: fa-chalkboard-teacher
+        menu:
+        - text: 1. Basic concepts
+          href: 01-dataprocessing.html
+        - text: 1.1 Wrapup Data Processing 
+          href: 02-workflow-optimisation.html
+        - text: 2.1. Inference
+          href: 03-inference.html
+        - text: 2.2. Wrapup Blocking
+          href: 03-blocking-wrapup.html
+
+          
+      - text: "Tutorials"
+        icon: fa-chalkboard-teacher
+        menu:
+        - text: 1. Tutorial Data Processing
+          href: 01-tutorial-data-processing.html
+        - text: 2. Tutorial Differential Analysis and Design
+          href: 03-tutorial-Design.html
+
+          
+bibliography: references.bib
+
+execute:
+  freeze: auto
+
+format:
+  html:
+    theme:
+      - cosmo
+      - custom.scss
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
+    number-depth: 3
+    code-copy: true
+
+author:
+  - name: Lieven Clement
+    orcid: 0000-0002-9050-4370
+    affiliation: 
+      - name: Ghent University
+
