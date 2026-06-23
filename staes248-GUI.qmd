@@ -408,3 +408,28 @@ You can also change the colors, split the panels, etc. When you play with the `V
 e.g., `conditionratio08.pval` and `conditionratio08.logFC`. You can now again select a region in the plot to display the features in the table below. You can also ask for a panel tour... 
 
 ![Figure 31. altSEE8](./figs/altSEE8.png)
+
+7. Note, that the iSEE app also enables researchers to download the individual panels
+
+
+    a. Click `export icon` at the top right 
+    b. Click `download panel output`. A new panel appears where you can select the iSEE panels for download. 
+    c. Click Download and you can download the output of the selected panels in a zip file
+    d. When you open the zip-file you can inspect your selected output. 
+    
+    
+![Figure 32. altSEE downloads 1](./figs/iSEE-download1.png)
+
+![Figure 33. iSEE downloads 2](./figs/iSEE-download2.png)
+
+![Figure 34. altSEE downloads 3](./figs/iSEE-downloads3.png)
+
+![Figure 35. altSEE downloads 4](./figs/iSEE-downloads4.png)
+
+![Figure 36. altSEE downloads 5](./figs/iSEE-downloads5.png)
+
+
+8. Interestingly, the iSEE app also enables you to download the R-code to reproduce the selected panels in R. You can copy this code in your R markdown report to include these figures there. This enables you to fully reproduce the data analysis and plots. 
+
+![Figure 37. altSEE downloads 6](./figs/iSEE-downloads6.png)
+
