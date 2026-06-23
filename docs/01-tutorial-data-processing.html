@@ -225,10 +225,10 @@ div.csl-indent {
 <li>raw MS1 area: Ms1.Area, normalised MS1 Area: Ms1.Normalised, MS2 Precursor quantities: Precursor.Quantity, Normalised MS2 Precursor quantities: Precursor.Normalised, etc., which are all at the precursor level</li>
 <li>MS2 based summary at the protein (protein group)-level: PG.MaxLFQ</li>
 </ul>
-<p>[1.a] Participants can perform an analysis using the <a href="./staes-medianOfRatios-maxLFQ.html">Rmarkdown script</a> or the <a href="./staes248-GUI.html">msqrob2GUI</a>. Here, we will use the <code>Precursor.Quantity</code> column. Follow the steps in the script or gui and try to understand each of the analysis steps. We know the real FC for the spike in proteins and the yeast proteins (see description of the data). What do you observe?</p>
-<p>[1.b] Repeat the analysis and change the normalisation to ‘diff.median’ that centers all samples (columns) so that they all match the grand median by subtracting the respective columns medians differences to the grand median (code: <code>qf &lt;- normalize(qf,   i = "precursors_log", name = "precursors_norm", method = "diff.median")</code>. What do you observe and try to explain this.</p>
+<p>[1.a] Participants can perform an analysis using the <a href="./staes-medianOfRatios-maxLFQ.html">staes rmarkdown script</a> or the <a href="./staes248-GUI.html">msqrob2GUI</a>. Here, we will use the <code>Precursor.Quantity</code> column. Follow the steps in the script or gui and try to understand each of the analysis steps. We know the real FC for the spike in proteins and the yeast proteins (see description of the data). What do you observe?</p>
+<p>[1.b] Repeat the analysis and change the normalisation to <code>diff.median</code> that centers all samples (columns) so that they all match the grand median by subtracting the respective columns medians differences to the grand median (code in script: <code>qf &lt;- normalize(qf,   i = "precursors_log", name = "precursors_norm", method = "diff.median")</code>. What do you observe and try to explain this.</p>
 <p>[1.c] Repeat the analysis starting from the <code>Precursor.Normalised</code> column. What do you observe? Are all data processing steps needed?</p>
-<p>[1.d] Repeat the analysis, again use the basis script with median normalisation factors (<code>nf_log_med</code> function). First change the summarisation with the <code>aggregateFeatures</code> function by replacing maxLFQ with median polish (<code>fun = MsCoreUtils::medianPolish</code>), then use simple median summarisation (<code>fun = matrixStats::colMedians</code>). (Note, that you also have to add an additional argument for median polish and median summarisation to handle missing values, i.e.&nbsp;add an additional argument <code>na.rm = TRUE</code>, i.e.&nbsp;replace <code>fun = function(X) iq::maxLFQ(X)$estimate</code> with <code>fun = MsCoreUtils::medianPolish, na.rm = TRUE</code>). What do you observe and try to explain this.</p>
+<p>[1.d] Repeat the analysis, again use the basis script with median of ratio’s normalisation factors (<code>nfLogMedianOfRatios</code> function). First change the summarisation with the <code>aggregateFeatures</code> function by replacing maxLFQ with median polish (in scripts: <code>fun = MsCoreUtils::medianPolish</code>), then use simple median summarisation (in scripts: <code>fun = matrixStats::colMedians</code>). What do you observe and try to explain this. (Note, that if you use scripts, you also have to add an additional argument for median polish and median summarisation to handle missing values, i.e.&nbsp;add an additional argument <code>na.rm = TRUE</code>, i.e.&nbsp;replace <code>fun = function(X) iq::maxLFQ(X)$estimate</code> with <code>fun = function(X) MsCoreUtils::medianPolish(X, na.rm = TRUE</code>).</p>
 </section>
 <section id="breast-cancer-example" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Breast cancer example</h1>
@@ -240,11 +240,10 @@ div.csl-indent {
 <li>For a 6 vs 6 comparison</li>
 <li>For a 9 vs 9 comparison</li>
 </ol>
-<p>Note, that the data are from data dependent acquistion and searched with maxQuant data, so the data processing will be slightly different. Users that work with scripts can modify the Rmarkdown script](./cptac.html).</p>
+<p>Note, that the data are from data dependent acquistion and searched with maxQuant data, so the data processing will be slightly different. Users that work with scripts can modify the <a href="./cptac.html">cptac Rmarkdown script</a>.</p>
 <pre><code>https://github.com/statOmics/msqrob2data/raw/refs/heads/main/dda/cancer/peptides3vs3.txt
 https://github.com/statOmics/msqrob2data/raw/refs/heads/main/dda/cancer/peptides6vs6.txt
 https://github.com/statOmics/msqrob2data/raw/refs/heads/main/dda/cancer/peptides9vs9.txt</code></pre>
-<p>ecols &lt;- grep( “Intensity\.”, names(read.delim(peptidesFile)) )</p>
 </section>
 <section id="references" class="level1" data-number="3">
 

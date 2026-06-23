@@ -882,9 +882,9 @@ Click to see code
 <li><p>maxLFQ</p></li>
 <li><p>median polish</p></li>
 <li><p>median summarisation</p></li>
-<li><p>maxLFQ summarise the precursor-level data into protein intensities using maxLFQ. maxLFQ first calculates all pairwise log ratio’s between samples only using their shared precursors. Particularly, it uses the median of the log ratio’s between the shared precursors s, i.e.&nbsp; <span class="math display">\[r_{ij} = median(y_{sj}-y_{si})\]</span>.<br>
-Hence, it first eliminates peptide effects. It then estimates the summaries by solving</p></li>
+<li><p>maxLFQ summarise the precursor-level data into protein intensities using maxLFQ. maxLFQ first calculates all pairwise log ratio’s between samples only using their shared precursors. Particularly, it uses the median of the log ratio’s between the shared precursors, i.e.&nbsp; <span class="math display">\[r_{ij} = median(y_{sj}-y_{si})\]</span>.</p></li>
 </ol>
+<p>Hence, it first eliminates peptide effects. It then estimates the summaries by solving</p>
 <p><span class="math display">\[
 \sum_i\sum_j(y^{prot}_j - y^{prot}_i - r_ij)^2
 \]</span> It is implemented in the <code>maxLFQ</code> function of the <code>iq</code> package.</p>

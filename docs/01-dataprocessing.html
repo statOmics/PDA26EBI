@@ -235,7 +235,7 @@ window.Quarto = {
   <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background"><span class="header-section-number">1</span> Background</a>
   <ul class="collapse">
   <li><a href="#conventional-ms-based-workflow" id="toc-conventional-ms-based-workflow" class="nav-link" data-scroll-target="#conventional-ms-based-workflow"><span class="header-section-number">1.1</span> Conventional MS-based workflow</a></li>
-  <li><a href="#data-dependent-acquisition" id="toc-data-dependent-acquisition" class="nav-link" data-scroll-target="#data-dependent-acquisition"><span class="header-section-number">1.2</span> Data Dependent Acquisition</a></li>
+  <li><a href="#data-independent-acquisition" id="toc-data-independent-acquisition" class="nav-link" data-scroll-target="#data-independent-acquisition"><span class="header-section-number">1.2</span> Data Independent Acquisition</a></li>
   <li><a href="#level-of-quantification" id="toc-level-of-quantification" class="nav-link" data-scroll-target="#level-of-quantification"><span class="header-section-number">1.3</span> Level of quantification</a></li>
   <li><a href="#sec-dia_challenges" id="toc-sec-dia_challenges" class="nav-link" data-scroll-target="#sec-dia_challenges"><span class="header-section-number">1.4</span> Challenges</a></li>
   <li><a href="#dia-workflow" id="toc-dia-workflow" class="nav-link" data-scroll-target="#dia-workflow"><span class="header-section-number">1.5</span> DIA workflow</a></li>
@@ -340,8 +340,8 @@ window.Quarto = {
 
 
 <p>Largely adapted from chapter “Statistical analysis with msqrob2” in msqrob2book (<a href="https://statomics.github.io/msqrob2book/01-basics.html">https://statomics.github.io/msqrob2book/</a>) by Christophe Vanderaa, Stijn Vandenbulcke and Lieven Clement.</p>
-<p>Note, that learners who are following the course by using the interactive msqrob2gui APPs can largely ignore the code in this document. The code is here for their reference so that they could progress there coding skills in the future so as to exploit the full power of msqrob2 to develop and automate reproducible data analysis workflows.</p>
-<p>Note, however, that the definition of the models and the contrasts in sections {#sec-modeling} and {#sec-inference} are useful for all users as these also have to be defined in our interactive Apps.</p>
+<p>Note, that learners who are following the course by using the interactive msqrob2gui APPs can largely ignore the code in this document. The code is here for their reference so that they could progress their coding skills in the future so as to exploit the full power of msqrob2 to develop and automate reproducible data analysis workflows.</p>
+<p>Note, however, that the definition of the models and the contrasts in sections <a href="#sec-modeling" class="quarto-xref">Section&nbsp;6</a> and <a href="#sec-inference" class="quarto-xref">Section&nbsp;6.3</a> are useful for all users as these also have to be defined in our interactive Apps.</p>
 <p>This chapter explains the main concepts for data-processing and statistical analysis of (DIA) proteomics data using <code>msqrob2</code>. To illustrate these concepts, we will use using a publicly available spike-in study published by Staes et al. <span class="citation" data-cites="Staes2024">(<a href="#ref-Staes2024" role="doc-biblioref">Staes et al. 2024</a>)</span>. They spiked digested UPS proteins in a yeast digested background at the following ratio’s (yeast:ups ratio 10:1, 10:2, 10:4, 10:8, 10:10). Here we will use a subset of the data, i.e.&nbsp;dilutions 10:2, 10:4 and 10:8. We will use output of the search engine DIA-NN 2.2.0. The main search output for this DIA-NN version was stored in the report.parquet file in the DIA-NN output directory.</p>
 <section id="background" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Background</h1>
@@ -374,8 +374,8 @@ window.Quarto = {
 </ul>
 <p><span class="math inline">\(\rightarrow\)</span> Unbalanced pepide identifications across samples and messy data</p>
 </section>
-<section id="data-dependent-acquisition" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="data-dependent-acquisition"><span class="header-section-number">1.2</span> Data Dependent Acquisition</h2>
+<section id="data-independent-acquisition" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="data-independent-acquisition"><span class="header-section-number">1.2</span> Data Independent Acquisition</h2>
 <p>With data independent acquisition, however, the second round of MS (MS2) does not record fragmented ions for selected ions. Instead the instrument divides the m/z range into sequential windows (e.g., 400–425, 425–450 m/z) and all ions within each window are fragmented together. This continues across the full mass range resulting in a systematic fragmentation of all peptides. Hence, the MS2 spectra are complex as many peptides mixed. So search engines and quantification software, such as DIA-NN and Spectronaut, have to deconvolute the complex MS2 spectra so as to identify and quantify individual precursors (MS1) in the m/z window using their MS2 fragments. Hence, the quantification can be done using either MS1 or MS2.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -433,7 +433,7 @@ window.Quarto = {
 <ul>
 <li>MS-based proteomics does not measure proteins directly, but their constituting <strong>peptide ions</strong>. The protein-level information needs to be reconstructed from the ion data. In this tutorial, we will start from the precursor-level data, which has been constructed from the ion data by DIA-NN.</li>
 <li>All peptides do not ionise with the same efficiency. Poor ionisation will lead to reduced signal as less ions will hit the detector, hence leading to a huge variability in intensity among different peptide species, even when they originate from the same protein.</li>
-<li>The identification step is not trivial and prone to errors<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. PSM misidentification leads to the assignment of a quantitative values from another peptide with likely another ionisation efficiency and relative abundance. Hence this misassigned values often lead to outliers.</li>
+<li>The identification step is not trivial and prone to errors<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. PSM misidentification leads to the assignment of a quantitative value from another peptide with likely another ionisation efficiency and relative abundance. Hence this misassigned values often lead to outliers.</li>
 <li>Moreover, there is a widespread data missingness, which is often related to the underlying quantification value. This phenomenon is known as missingness not at random. Next to that, many reasons can lead to ions not being identified irrespective of their quantification value leading to missingness that is not related to its quantitative value. This is referred to as missingness completely at random. The missingness issue is not negligible as we shall see upon reading the data.</li>
 <li>Identification issues lead to unbalanced peptide missingness across samples, and the patterns of missing values are potentially different for every peptide, highlighting the need for an automatised solution that is robust against missing values.</li>
 <li>Technical variations during the experiment can lead to systematic fluctuations across samples. The most obvious reason is when different sample amounts are injected into the instruments, due to small pipetting inconsistencies for instance. However, these differences lead to unwanted variation that should be discarded when answering biological questions.</li>
@@ -1654,7 +1654,7 @@ Click to see code
 </section>
 <section id="assay-joining" class="level3" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="assay-joining"><span class="header-section-number">4.2.2</span> Assay joining</h3>
-<p>Up to now, the data from different runs were kept in separate assays. We can now join the normalised sets into an precursor set using joinAssays(). Sets are joined by stacking the columns (samples) in a matrix and rows (features) are matched according to a row identifier, here the <code>Precursor.Id</code>. We will store the result in the assay with name: <code>precursor</code>.</p>
+<p>Up to now, the data from different runs were kept in separate assays. We can now join the normalised sets into an precursor set using joinAssays(). Sets are joined by stacking the columns (samples) in a matrix and rows (features) are matched according to a row identifier, here the <code>Precursor.Id</code>. We will store the result in the assay with name: <code>precursors</code>.</p>
 <details>
 <summary>
 Click to see code
@@ -1767,7 +1767,7 @@ Click to see code
 <p>Here, we remove proteins that can only be found by one peptide, as such proteins may not be trustworthy.</p>
 <ol type="1">
 <li><p>We first calculate how many distinct peptides map to each protein (<code>Protein.Group</code>). We use the stripped precursor sequence, i.e.&nbsp;sequence of the base peptide for this purpose.</p></li>
-<li><p>We store this information in the row data of the precursors assay</p></li>
+<li><p>We store this information in the row data of the precursors assay.</p></li>
 <li><p>We filter precursors of one-hit wonder proteins.</p></li>
 </ol>
 <details>
@@ -1880,10 +1880,10 @@ Click to Details for plot
 </div>
 <p>Even in this clean synthetic data set (same yeast background with some spiked UPS proteins), the marginal precursor intensity distributions across samples are not well aligned. Ignoring this effect will increase the noise and reduce the statistical power of the experiment, and may also, in case of unbalanced designs, introduce confounding effects that will bias the results.</p>
 <p>There are many ways to perform the normalisation, e.g.&nbsp;median centering is a popular choice. If we subtract the sample median at the log scale from each precursor log2 intensity, this basically boils down to calculating log-ratio’s between the precursor intensity and its sample median.</p>
-<p>Here, we will use the Median of Ratios method of DESeq2, which was originally developed for RNA-seq data analysis and can also correct for differences in composition of the proteomes in the different samples. The method first calculates pseudo-reference sample (row-wise mean of log2 intensities, which corresponds to the log2 transformed geometric mean). THen calculates log2 ratios of each sample w.r.t. the pseudo-reference. Finally the column wise median of these log2 ratios is taken to obtain the sample based normalisation factor on the log2 scale. This procedure is implemented in the <code>msqrob2</code> function <code>nfLogMedianOfRatios</code>.</p>
+<p>Here, we will use the Median of Ratios method of DESeq2, which was originally developed for RNA-seq data analysis and can also correct for differences in composition of the proteomes in the different samples. The method first calculates pseudo-reference sample (row-wise mean of log2 intensities, which corresponds to the log2 transformed geometric mean). Then calculates log2 ratios of each sample w.r.t. the pseudo-reference. Finally the column wise median of these log2 ratios is taken to obtain the sample based normalisation factor on the log2 scale. This procedure is implemented in the <code>msqrob2</code> function <code>nfLogMedianOfRatios</code>.</p>
 <ol type="1">
-<li>We calculate the log transformed normalisation factor from the Median of Ratios method</li>
-<li>Subtract these log2-norm factors from the intensities of each corresponding column of the assay data and store the result in the new assay peptides_norm. (We adopt the sweep function to the <code>peptides_log</code> assay of the spikein QFeatures object with as statistic the log2 normfactor <code>STATS = nfLog</code> the default function <code>FUN = "-"</code>, <code>MARGIN = 2</code> to substract the column wise log2 norm factor from each entry of the corresponding assay data).</li>
+<li>We calculate the log transformed normalisation factor from the Median of Ratios method.</li>
+<li>Subtract these log2-norm factors from the intensities of each corresponding column of the assay data and store the result in the new assay peptides_norm. (We adopt the sweep function to the <code>precursors_log</code> assay of the spikein QFeatures object with as statistic the log2 normfactor <code>STATS = nfLog</code> the default function <code>FUN = "-"</code>, <code>MARGIN = 2</code> to substract the column wise log2 norm factor from each entry of the corresponding assay data).</li>
 </ol>
 <details>
 <summary>
@@ -2348,7 +2348,7 @@ Click to see code
 <p><span class="math display">\[
 y_i = \mathbf{x}^T_i \boldsymbol{\beta} + \epsilon_i
 \]</span></p>
-<p>with <span class="math inline">\(y_i\)</span> the <span class="math inline">\(\log_2\)</span>-normalised and summarised protein intensities in sample <span class="math inline">\(i\)</span>; <span class="math inline">\(\mathbf{x}_i\)</span> a vector with the covariate pattern for the sample encoding the intercept, spike-in condition<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>, or other experimental factors; <span class="math inline">\(\boldsymbol{\beta}\)</span> the vector of parameters that model the association between the covariates and the outcome; and <span class="math inline">\(\epsilon_i\)</span> the residuals reflecting variation that is not captured by the fixed effects. Note that <span class="math inline">\(\mathbf{x}_i\)</span> allows for a flexible parameterisation of the treatment beyond a single covariate, i.e.&nbsp;including a 1 for the intercept, continuous and categorical variables as well as their interactions. We assume the residuals to be independent and identically distributed (i.i.d) according to a normal distribution with zero mean and constant variance, i.e.&nbsp;<span class="math inline">\(\epsilon_{i} \sim N(0,\sigma_\epsilon^2)\)</span>, that can differ from protein to protein.</p>
+<p>with <span class="math inline">\(y_i\)</span> the <span class="math inline">\(\log_2\)</span>-normalised and summarised protein intensities in sample <span class="math inline">\(i\)</span>; <span class="math inline">\(\mathbf{x}_i\)</span> a vector with the covariate pattern for the sample encoding the intercept, spike-in condition<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>, or other experimental factors; <span class="math inline">\(\boldsymbol{\beta}\)</span> the vector of parameters that model the association between the covariates and the outcome; and <span class="math inline">\(\epsilon_i\)</span> the residuals reflecting variation that is not captured by the fixed effects. Note that <span class="math inline">\(\mathbf{x}_i\)</span> allows for a flexible parameterisation of the treatment beyond a single covariate, i.e.&nbsp;including a 1 for the intercept, continuous and categorical variables as well as their interactions. We assume the residuals to be independent and to follow a normal distribution with zero mean and variance that can differ from protein to protein, i.e.&nbsp;<span class="math inline">\(\epsilon_{i} \sim N(0,\sigma_{\epsilon_i}^2)\)</span>.</p>
 <p>In R, this model is encoded using the following simple formula<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="er">~</span> condition</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2428,7 +2428,12 @@ Click to see code
 </div>
 </div>
 <p>This plot shows that the average protein <span class="math inline">\(\log_2\)</span> intensity for condition2 is modelled by <code>(Intercept)</code>, for the <code>condition4</code> group by <code>(Intercept) + condtion4</code> and for the <code>condition8</code> group by <code>(Intercept) + condtion8</code>.</p>
-<p>Hence, to assess differential abundance of proteins between spike-in conditions, we will have to assess all pairwise combinations between the spike-in groups, which leads to 3 different contrasts, i.e.&nbsp;the log2 fold change between ratio 4 and ratio 2, <span class="math inline">\(\log_2 FC_{4-2} = (Intercept + condition4) - Intercept = condition4\)</span>, the log2 fold change between ratio 8 and ratio 2, <span class="math inline">\(\log_2 FC_{8-2} = (Intercept + condition8) - Intercept = condition8\)</span>, and the log2 fold change between ratio 8 and ratio 4, <span class="math inline">\(\log_2 FC_{8-4} = (Intercept + condition8) - (Intercept+condition4) = condition8 - condition4\)</span>.</p>
+<p>Hence, to assess differential abundance of proteins between spike-in conditions, we will have to assess all pairwise combinations between the spike-in groups, which leads to 3 different contrasts:</p>
+<ul>
+<li><p>the log2 fold change between ratio 4 and ratio 2, <span class="math inline">\(\log_2 FC_{4-2} = (Intercept + condition4) - Intercept = condition4\)</span>.</p></li>
+<li><p>the log2 fold change between ratio 8 and ratio 2, <span class="math inline">\(\log_2 FC_{8-2} = (Intercept + condition8) - Intercept = condition8\)</span>.</p></li>
+<li><p>the log2 fold change between ratio 8 and ratio 4, <span class="math inline">\(\log_2 FC_{8-4} = (Intercept + condition8) - (Intercept+condition4) = condition8 - condition4\)</span>.</p></li>
+</ul>
 <section id="hypothesis-testing" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">6.3.1</span> Hypothesis testing</h3>
 <p>As shown above, the average difference in log2 intensity between condition 4 and 2 after correcting for the lab effect is <code>condition4</code>. This combination of parameters is also called a contrast. Thus, we assess the following null hypothesis for this contrast: <code>condition4 = 0</code> with our statistical test.</p>

@@ -59,7 +59,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -227,6 +246,7 @@ window.Quarto = {
   <li><a href="#data-modeling" id="toc-data-modeling" class="nav-link" data-scroll-target="#data-modeling"><span class="header-section-number">5</span> Data Modeling</a></li>
   <li><a href="#inference-tab" id="toc-inference-tab" class="nav-link" data-scroll-target="#inference-tab"><span class="header-section-number">6</span> Inference tab</a></li>
   <li><a href="#report-tab" id="toc-report-tab" class="nav-link" data-scroll-target="#report-tab"><span class="header-section-number">7</span> Report tab</a></li>
+  <li><a href="#explore-with-altsee-tab" id="toc-explore-with-altsee-tab" class="nav-link" data-scroll-target="#explore-with-altsee-tab"><span class="header-section-number">8</span> Explore with altSEE tab</a></li>
   </ul>
 </nav>
 </nav>
@@ -279,11 +299,11 @@ window.Quarto = {
 </ul>
 <p>In this vignette we will demonstrate how to perform <code>msqrob</code>’s summarisation based workflow starting from a Maxquant search on a subset of the cptac spike-in study.</p>
 <p>Examples on our peptide-based workflows and on the analysis of more complex designs can be found on our companion website <a href="https://statomics.github.io/msqrob2book">msqrob2 book</a>.</p>
-<p>Technical details on our methods can be found in <span class="citation" data-cites="goeminne2016">(<a href="#ref-goeminne2016" role="doc-biblioref"><strong>goeminne2016?</strong></a>)</span>, <span class="citation" data-cites="goeminne2020">(<a href="#ref-goeminne2020" role="doc-biblioref"><strong>goeminne2020?</strong></a>)</span>, <span class="citation" data-cites="sticker2020">(<a href="#ref-sticker2020" role="doc-biblioref"><strong>sticker2020?</strong></a>)</span> and <span class="citation" data-cites="vandenbulcke2025">(<a href="#ref-vandenbulcke2025" role="doc-biblioref"><strong>vandenbulcke2025?</strong></a>)</span>.</p>
+<p>Technical details on our methods can be found in <span class="citation" data-cites="goeminne2016-tr">(<a href="#ref-goeminne2016-tr" role="doc-biblioref"><strong>goeminne2016-tr?</strong></a>)</span>, <span class="citation" data-cites="Goeminne2020">(<a href="#ref-Goeminne2020" role="doc-biblioref">Goeminne et al. 2020</a>)</span>, <span class="citation" data-cites="sticker2020-rl">(<a href="#ref-sticker2020-rl" role="doc-biblioref"><strong>sticker2020-rl?</strong></a>)</span> and <span class="citation" data-cites="Vandenbulcke2025-sj">(<a href="#ref-Vandenbulcke2025-sj" role="doc-biblioref">Vandenbulcke et al. 2025</a>)</span>.</p>
 </section>
 <section id="background" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Background</h1>
-<p>This case-study is a subset of the data of the 6th study of the Clinical Proteomic Technology Assessment for Cancer (CPTAC). In this experiment, the authors spiked the Sigma Universal Protein Standard mixture 1 (UPS1) containing 48 different human proteins in a protein background of 60 ng/<span class="math inline">\(\mu\)</span>L Saccharomyces cerevisiae strain BY4741. Two different spike-in concentrations were used: 6A (0.25 fmol UPS1 proteins/<span class="math inline">\(\mu\)</span>L) and 6B (0.74 fmol UPS1 proteins/<span class="math inline">\(\mu\)</span>L) [5]. We limited ourselves to the data of LTQ-Orbitrap W at site 56. The data were searched with MaxQuant version 1.5.2.8, and detailed search settings were described in Goeminne et al.&nbsp;(2016) [1]. Three replicates are available for each concentration.</p>
+<p>This case-study is a subset of the data of the 6th study of the Clinical Proteomic Technology Assessment for Cancer (CPTAC). In this experiment, the authors spiked the Sigma Universal Protein Standard mixture 1 (UPS1) containing 48 different human proteins in a protein background of 60 ng/<span class="math inline">\(\mu\)</span>L Saccharomyces cerevisiae strain BY4741. Two different spike-in concentrations were used: 6A (0.25 fmol UPS1 proteins/<span class="math inline">\(\mu\)</span>L) and 6B (0.74 fmol UPS1 proteins/<span class="math inline">\(\mu\)</span>L) [5]. We limited ourselves to the data of LTQ-Orbitrap W at site 56. The data were searched with MaxQuant version 1.5.2.8, and detailed search settings were described in <span class="citation" data-cites="goeminne2016-tr">(<a href="#ref-goeminne2016-tr" role="doc-biblioref"><strong>goeminne2016-tr?</strong></a>)</span>. Three replicates are available for each concentration.</p>
 <section id="installation-instructions-and-setup" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="installation-instructions-and-setup"><span class="header-section-number">2.1</span> Installation instructions and setup</h2>
 <p>You can find the installation instructions for all required software to run this exercise in <a href="./index.html#software-and-data">software</a>. Install:</p>
@@ -333,7 +353,7 @@ window.Quarto = {
 </section>
 <section id="data-preprocessing" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Data preprocessing</h1>
-<p>Before analysing the data, we have perform data preprocessing. This to ensure the data meet our model assumptions.</p>
+<p>Before analysing the data, we have to perform data preprocessing. This to ensure the data meet our model assumptions.</p>
 <section id="import-the-data" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="import-the-data"><span class="header-section-number">3.1</span> Import the data</h2>
 <p>Our MS-based proteomics data analysis workflows always start with 2 pieces of data:</p>
@@ -394,7 +414,7 @@ window.Quarto = {
 </figure>
 </div>
 <ol type="1">
-<li><p>First we can resture the QFeatures object from import. This is something that we always have do if we change the data processing settings and want to redo the datas processing.</p></li>
+<li><p>First we can restore the QFeatures object from import. This is something that we always have to do if we change the data processing settings and want to redo the data processing.</p></li>
 <li><p>We can convert zeros to NA. This is important. Many softwares encode missing data with 0 intensity. If we want to address missingness and/or want to log-transfrom the data we have to convert the zeros to NA. You can hit the test button to test this setting.</p></li>
 <li><p>We filter the data. We can add filters to the data based on the columns that contain information on the imported quant features. For DIA-NN, Spectronaut and MaxQuant we already provide sensible defaults. E.g.</p>
 <ul>
@@ -486,10 +506,10 @@ We observe that also at the protein level the distribution of all features and t
 <p>We will now model the data at the protein level.</p>
 <ol type="1">
 <li>We select the <code>protein_filter_na</code> set in <code>Select Assay</code></li>
-<li>We can model the sources of variation in the data using the variables in the annotation file. In this experimental design, we can model a single source of variation: spike-in concentration8. All remaining sources of variability, e.g.&nbsp;pipetting errors, MS run to run variability, etc will be lumped in the residual variability (error term). We can do this by using the variable condition. We have to defien a model formula for that. The model always starts with <code>~</code>. So we type <code>~ condition</code> in the <code>Design formula</code>. Note, that you can copy and paste the variable names that are listed below Build Model to avoid typing errors.</li>
+<li>We can model the sources of variation in the data using the variables in the annotation file. In this experimental design, we can model a single source of variation: spike-in concentration8. All remaining sources of variability, e.g.&nbsp;pipetting errors, MS run to run variability, etc will be lumped in the residual variability (error term). We can do this by using the variable condition. We have to define a model formula for that. The model always starts with <code>~</code>. So we type <code>~ condition</code> in the <code>Design formula</code>. Note, that you can copy and paste the variable names that are listed below Build Model to avoid typing errors.</li>
 <li>We can set the option <code>Ridge regression for fixed effects</code>, which is by default set at <code>No</code>. Ridge regression can stabilize the estimation of the model parameters. However, we only advice that for designs with many model parameters.</li>
 <li>We can set the option <code>Robust regression for fixed effects</code>, which is by default set at <code>Yes</code>. This robustifies the parameter estimation against outliers, which often occur in proteomics data.</li>
-<li>As soon as a valid model is formulated you will see that a plot appears under Visualize Design. The plot shows the different means that are modeled. Here we see that</li>
+<li>As soon as a valid model is formulated you will see that a plot appears under Visualize Design. The plot shows the different means that are modeled.</li>
 <li><em>Do not forget to hit the <code>Fit Model!</code></em> button to fit the model for each feature of the selected assay.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
@@ -582,7 +602,15 @@ We observe that also at the protein level the distribution of all features and t
 <figcaption>Figure 21. Report 2</figcaption>
 </figure>
 </div>
-<p><img src="./figs/report3.png" class="img-fluid" alt="Figure 22. Report 3"> # Explore with altSEE tab</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./figs/report3.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 22. Report 3</figcaption>
+</figure>
+</div>
+</section>
+<section id="explore-with-altsee-tab" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Explore with altSEE tab</h1>
 <p>You can also explore the results interactively.</p>
 <ol type="1">
 <li>Select the <code>Main experiment</code> (that is by default the assay selected for modeling)</li>
@@ -590,7 +618,7 @@ We observe that also at the protein level the distribution of all features and t
 <li>Optionally you can select the variable that will be used in the X-axis of the plots when starting the app (they can be changed in the app). Here, we choose the variable <code>sampleId</code></li>
 <li>Optionally you can select the column that can link features between the Main experiment and the Alt experiment. Here, that is the <code>Protein.Group</code> that was used for aggregation.</li>
 <li>We hit the Launch iSEE button and a novel app will be prepared. That typically takes a while.</li>
-<li>Once you see `Ready. Refresh the iSEE tab after re-launching, you can clikc the link and that will open the iSEE app in a new browser window. Again this can take a while.</li>
+<li>Once you see `Ready. Refresh the iSEE tab after re-launching, you can click the link and that will open the iSEE app in a new browser window. Again this can take a while.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -606,7 +634,7 @@ We observe that also at the protein level the distribution of all features and t
 </div>
 <p>Once the iSEE app is open, we can interactively explore the data.</p>
 <ol type="1">
-<li>The top panels show the reduced dimension plots for both the main and alt experiment. Note, that you can change the alt experiment, under data parameters if you want to explore other assays.</li>
+<li>The top panels show the reduced dimension plots for both the main and alt experiment. Note, that you can change the alt experiment, under data parameters, if you want to explore other assays.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -670,9 +698,17 @@ You can also change the colors, split the panels, etc. When you play with the <c
 
 <!-- -->
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Goeminne2020" class="csl-entry" role="listitem">
+Goeminne, Ludger, Adriaan Sticker, Lennart Martens, Kris Gevaert, and Lieven Clement. 2020. <span>“MSqRob Takes the Missing Hurdle: Uniting Intensity- and Count-Based Proteomics.”</span> <em>Analytical Chemistry</em> 92 (9): 6278–87. <a href="https://doi.org/10.1021/acs.analchem.9b04375">https://doi.org/10.1021/acs.analchem.9b04375</a>.
+</div>
+<div id="ref-Vandenbulcke2025-sj" class="csl-entry" role="listitem">
+Vandenbulcke, Stijn, Christophe Vanderaa, Oliver Crook, Lennart Martens, and Lieven Clement. 2025. <span>“<span>Msqrob2TMT</span>: Robust Linear Mixed Models for Inferring Differential Abundant Proteins in Labeled Experiments with Arbitrarily Complex Design.”</span> <em>Mol. Cell. Proteomics</em> 24 (7): 101002.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -1168,8 +1204,8 @@ You can also change the colors, split the panels, etc. When you play with the <c
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>designs can be found on our companion website </span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">msqrob2 book</span><span class="co">](https://statomics.github.io/msqrob2book)</span>.</span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>Technical details on our methods can be found in <span class="co">[</span><span class="ot">@goeminne2016</span><span class="co">]</span>, </span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">@goeminne2020</span><span class="co">]</span>, <span class="co">[</span><span class="ot">@sticker2020</span><span class="co">]</span> and <span class="co">[</span><span class="ot">@vandenbulcke2025</span><span class="co">]</span>.</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>Technical details on our methods can be found in <span class="co">[</span><span class="ot">@goeminne2016-tr</span><span class="co">]</span>, </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">@Goeminne2020</span><span class="co">]</span>, <span class="co">[</span><span class="ot">@sticker2020-rl</span><span class="co">]</span> and <span class="co">[</span><span class="ot">@Vandenbulcke2025-sj</span><span class="co">]</span>.</span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="fu"># Background</span></span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
@@ -1182,7 +1218,7 @@ You can also change the colors, split the panels, etc. When you play with the <c
 <span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>6A (0.25 fmol UPS1 proteins/$\mu$L) and 6B (0.74 fmol UPS1 proteins/$\mu$L) <span class="co">[</span><span class="ot">5</span><span class="co">]</span>.</span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>We limited ourselves to the data of LTQ-Orbitrap W at site 56.</span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>The data were searched with MaxQuant version 1.5.2.8, and</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>detailed search settings were described in Goeminne et al. (2016) <span class="co">[</span><span class="ot">1</span><span class="co">]</span>.</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>detailed search settings were described in @goeminne2016-tr.</span>
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>Three replicates are available for each concentration.</span>
 <span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
@@ -1238,7 +1274,7 @@ You can also change the colors, split the panels, etc. When you play with the <c
 <span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data preprocessing</span></span>
 <span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>Before analysing the data, we have perform data preprocessing. This to ensure </span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>Before analysing the data, we have to perform data preprocessing. This to ensure </span>
 <span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>the data meet our model assumptions. </span>
 <span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="fu">## Import the data</span></span>
@@ -1310,9 +1346,9 @@ You can also change the colors, split the panels, etc. When you play with the <c
 <span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 6. Data Processing 2](./figs/dataprocessing2.png)</span></span>
 <span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>First we can resture the QFeatures object from import. This is something that </span>
-<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>we always have do if we change the data processing settings and want to redo the </span>
-<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>datas processing. </span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>First we can restore the QFeatures object from import. This is something that </span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>we always have to do if we change the data processing settings and want to redo the </span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>data processing. </span>
 <span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>We can convert zeros to NA. This is important. Many softwares encode missing </span>
 <span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a>data with 0 intensity. If we want to address missingness and/or want to log-transfrom</span>
@@ -1407,11 +1443,11 @@ You can also change the colors, split the panels, etc. When you play with the <c
 <span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>We select the <span class="in">`protein_filter_na`</span> set in <span class="in">`Select Assay`</span></span>
 <span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>We can model the sources of variation in the data using the variables in the annotation file. </span>
 <span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a>   In this experimental design, we can model a single source of variation: spike-in concentration8. All remaining sources of variability, e.g. pipetting errors, MS run to run variability, etc will be lumped in the residual variability (error term). We can do this by using the variable condition. </span>
-<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>   We have to defien a model formula for that. The model always starts with <span class="in">`~`</span>. So we type <span class="in">`~ condition`</span> in the <span class="in">`Design formula`</span>. Note, that you can copy and paste the variable names that are listed below Build Model to avoid typing errors.</span>
+<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>   We have to define a model formula for that. The model always starts with <span class="in">`~`</span>. So we type <span class="in">`~ condition`</span> in the <span class="in">`Design formula`</span>. Note, that you can copy and paste the variable names that are listed below Build Model to avoid typing errors.</span>
 <span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>We can set the option <span class="in">`Ridge regression for fixed effects`</span>, which is by default set at <span class="in">`No`</span>. Ridge regression can stabilize the estimation of the model parameters. However, we only advice that for designs with many model parameters. </span>
 <span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>We can set the option <span class="in">`Robust regression for fixed effects`</span>, which is by default set at <span class="in">`Yes`</span>. This robustifies the parameter estimation against outliers, which often occur in proteomics data. </span>
 <span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>As soon as a valid model is formulated you will see that a plot appears under </span>
-<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>   Visualize Design. The plot shows the different means that are modeled. Here we see that </span>
+<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>   Visualize Design. The plot shows the different means that are modeled. </span>
 <span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>*Do not forget to hit the `Fit Model!`* button to fit the model for each feature of the selected assay.</span>
 <span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 13. Model 1](./figs/model1.png)</span></span>
@@ -1486,52 +1522,54 @@ You can also change the colors, split the panels, etc. When you play with the <c
 <span id="cb2-360"><a href="#cb2-360" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 21. Report 2](./figs/report2.png)</span></span>
 <span id="cb2-361"><a href="#cb2-361" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-362"><a href="#cb2-362" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 22. Report 3](./figs/report3.png)</span></span>
-<span id="cb2-363"><a href="#cb2-363" aria-hidden="true" tabindex="-1"></a><span class="fu"># Explore with altSEE tab</span></span>
+<span id="cb2-363"><a href="#cb2-363" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-364"><a href="#cb2-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-365"><a href="#cb2-365" aria-hidden="true" tabindex="-1"></a>You can also explore the results interactively. </span>
+<span id="cb2-365"><a href="#cb2-365" aria-hidden="true" tabindex="-1"></a><span class="fu"># Explore with altSEE tab</span></span>
 <span id="cb2-366"><a href="#cb2-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-367"><a href="#cb2-367" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Select the <span class="in">`Main experiment`</span> (that is by default the assay selected for modeling)</span>
-<span id="cb2-368"><a href="#cb2-368" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Select the <span class="in">`Alt experiment`</span> the is by default the first assay in the QFeatures object that differs from the <span class="in">`Main experiment`</span> define in 1. Here we will select <span class="in">`quants_norm`</span></span>
-<span id="cb2-369"><a href="#cb2-369" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Optionally you can select the variable that will be used in the X-axis of the plots when starting the app (they can be changed in the app). Here, we choose the variable <span class="in">`sampleId`</span></span>
-<span id="cb2-370"><a href="#cb2-370" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Optionally you can select the column that can link features between the Main experiment and the Alt experiment. Here, that is the <span class="in">`Protein.Group`</span> that was used for aggregation. </span>
-<span id="cb2-371"><a href="#cb2-371" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>We hit the Launch iSEE button and a novel app will be prepared. That typically takes a while.</span>
-<span id="cb2-372"><a href="#cb2-372" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Once you see `Ready. Refresh the iSEE tab after re-launching, you can clikc the link and that will open the iSEE app in a new browser window. Again this can take a while. </span>
-<span id="cb2-373"><a href="#cb2-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-374"><a href="#cb2-374" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 23. AltSee 1](./figs/altSEE1.png)</span></span>
+<span id="cb2-367"><a href="#cb2-367" aria-hidden="true" tabindex="-1"></a>You can also explore the results interactively. </span>
+<span id="cb2-368"><a href="#cb2-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-369"><a href="#cb2-369" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Select the <span class="in">`Main experiment`</span> (that is by default the assay selected for modeling)</span>
+<span id="cb2-370"><a href="#cb2-370" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Select the <span class="in">`Alt experiment`</span> the is by default the first assay in the QFeatures object that differs from the <span class="in">`Main experiment`</span> define in 1. Here we will select <span class="in">`quants_norm`</span></span>
+<span id="cb2-371"><a href="#cb2-371" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Optionally you can select the variable that will be used in the X-axis of the plots when starting the app (they can be changed in the app). Here, we choose the variable <span class="in">`sampleId`</span></span>
+<span id="cb2-372"><a href="#cb2-372" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Optionally you can select the column that can link features between the Main experiment and the Alt experiment. Here, that is the <span class="in">`Protein.Group`</span> that was used for aggregation. </span>
+<span id="cb2-373"><a href="#cb2-373" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>We hit the Launch iSEE button and a novel app will be prepared. That typically takes a while.</span>
+<span id="cb2-374"><a href="#cb2-374" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Once you see `Ready. Refresh the iSEE tab after re-launching, you can click the link and that will open the iSEE app in a new browser window. Again this can take a while. </span>
 <span id="cb2-375"><a href="#cb2-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-376"><a href="#cb2-376" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 24. altSEE 2](./figs/altSEE2.png)</span></span>
+<span id="cb2-376"><a href="#cb2-376" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 23. AltSee 1](./figs/altSEE1.png)</span></span>
 <span id="cb2-377"><a href="#cb2-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-378"><a href="#cb2-378" aria-hidden="true" tabindex="-1"></a>Once the iSEE app is open, we can interactively explore the data. </span>
+<span id="cb2-378"><a href="#cb2-378" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 24. altSEE 2](./figs/altSEE2.png)</span></span>
 <span id="cb2-379"><a href="#cb2-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-380"><a href="#cb2-380" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>The top panels show the reduced dimension plots for both the main and alt experiment. </span>
-<span id="cb2-381"><a href="#cb2-381" aria-hidden="true" tabindex="-1"></a>Note, that you can change the alt experiment, under data parameters if you want to explore other assays. </span>
-<span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-383"><a href="#cb2-383" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 25. AltSee 0](./figs/altSEE0.png)</span></span>
+<span id="cb2-380"><a href="#cb2-380" aria-hidden="true" tabindex="-1"></a>Once the iSEE app is open, we can interactively explore the data. </span>
+<span id="cb2-381"><a href="#cb2-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>The top panels show the reduced dimension plots for both the main and alt experiment. </span>
+<span id="cb2-383"><a href="#cb2-383" aria-hidden="true" tabindex="-1"></a>Note, that you can change the alt experiment, under data parameters, if you want to explore other assays. </span>
 <span id="cb2-384"><a href="#cb2-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-385"><a href="#cb2-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-386"><a href="#cb2-386" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>The second panels show volcano plots. Note, that we do not have a volcano plot for the altExp because we did not fit models at the precursor level. We can also select points in the volcano plot. These will then be selected in the table below, which is linked to the volcanoplot. </span>
+<span id="cb2-385"><a href="#cb2-385" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 25. AltSee 0](./figs/altSEE0.png)</span></span>
+<span id="cb2-386"><a href="#cb2-386" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-387"><a href="#cb2-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-388"><a href="#cb2-388" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 26. altSEE 3](./figs/altSEE3.png)</span></span>
+<span id="cb2-388"><a href="#cb2-388" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>The second panels show volcano plots. Note, that we do not have a volcano plot for the altExp because we did not fit models at the precursor level. We can also select points in the volcano plot. These will then be selected in the table below, which is linked to the volcanoplot. </span>
 <span id="cb2-389"><a href="#cb2-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-390"><a href="#cb2-390" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>In the table now all significant hits are shown that we selected in the volcanoplot. We can select a hit in the table, but we first order the table according to the p.value. We now select the top hit.</span>
+<span id="cb2-390"><a href="#cb2-390" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 26. altSEE 3](./figs/altSEE3.png)</span></span>
 <span id="cb2-391"><a href="#cb2-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-392"><a href="#cb2-392" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 27. altSEE 4](./figs/altSEE4.png)</span></span>
+<span id="cb2-392"><a href="#cb2-392" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>In the table now all significant hits are shown that we selected in the volcanoplot. We can select a hit in the table, but we first order the table according to the p.value. We now select the top hit.</span>
 <span id="cb2-393"><a href="#cb2-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-394"><a href="#cb2-394" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>This hit will now be visualised in the bottom panels. The plots show the results for each feature that maps to the protein in the left data table (when starting the app, as a user you can change that). Features are connected with a line, in the default visualisation. </span>
+<span id="cb2-394"><a href="#cb2-394" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 27. altSEE 4](./figs/altSEE4.png)</span></span>
 <span id="cb2-395"><a href="#cb2-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-396"><a href="#cb2-396" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 28. altSEE 5](./figs/altSEE5.png)</span></span>
+<span id="cb2-396"><a href="#cb2-396" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>This hit will now be visualised in the bottom panels. The plots show the results for each feature that maps to the protein in the left data table (when starting the app, as a user you can change that). Features are connected with a line, in the default visualisation. </span>
 <span id="cb2-397"><a href="#cb2-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-398"><a href="#cb2-398" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>We can also change the plot layout, e.g. to show violin plots for the precursors. E.g click data parameters &gt; Plot type &gt; automatic. For factor variables in the x axis, by default we get a violin plot.  </span>
-<span id="cb2-399"><a href="#cb2-399" aria-hidden="true" tabindex="-1"></a>You can also change the colors, split the panels, etc. When you play with the <span class="in">`Visualisation parameters`</span>. You can click the <span class="in">`Question mark`</span> next to the panel to get a panel tour.</span>
-<span id="cb2-400"><a href="#cb2-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-401"><a href="#cb2-401" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 29. altSEE 6](./figs/altSEE6.png)</span></span>
+<span id="cb2-398"><a href="#cb2-398" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 28. altSEE 5](./figs/altSEE5.png)</span></span>
+<span id="cb2-399"><a href="#cb2-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-400"><a href="#cb2-400" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>We can also change the plot layout, e.g. to show violin plots for the precursors. E.g click data parameters &gt; Plot type &gt; automatic. For factor variables in the x axis, by default we get a violin plot.  </span>
+<span id="cb2-401"><a href="#cb2-401" aria-hidden="true" tabindex="-1"></a>You can also change the colors, split the panels, etc. When you play with the <span class="in">`Visualisation parameters`</span>. You can click the <span class="in">`Question mark`</span> next to the panel to get a panel tour.</span>
 <span id="cb2-402"><a href="#cb2-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-403"><a href="#cb2-403" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 30. altSEE7](./figs/altSEE7.png)</span></span>
+<span id="cb2-403"><a href="#cb2-403" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 29. altSEE 6](./figs/altSEE6.png)</span></span>
 <span id="cb2-404"><a href="#cb2-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-405"><a href="#cb2-405" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>You can change the contrast by going back to the volcano plot and  click on Data parameters and select </span>
-<span id="cb2-406"><a href="#cb2-406" aria-hidden="true" tabindex="-1"></a>e.g., <span class="in">`conditionratio08.pval`</span> and <span class="in">`conditionratio08.logFC`</span>. You can now again select a region in the plot to display the features in the table below. You can also ask for a panel tour... </span>
-<span id="cb2-407"><a href="#cb2-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-408"><a href="#cb2-408" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 31. altSEE8](./figs/altSEE8.png)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb2-405"><a href="#cb2-405" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 30. altSEE7](./figs/altSEE7.png)</span></span>
+<span id="cb2-406"><a href="#cb2-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-407"><a href="#cb2-407" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>You can change the contrast by going back to the volcano plot and  click on Data parameters and select </span>
+<span id="cb2-408"><a href="#cb2-408" aria-hidden="true" tabindex="-1"></a>e.g., <span class="in">`conditionratio08.pval`</span> and <span class="in">`conditionratio08.logFC`</span>. You can now again select a region in the plot to display the features in the table below. You can also ask for a panel tour... </span>
+<span id="cb2-409"><a href="#cb2-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-410"><a href="#cb2-410" aria-hidden="true" tabindex="-1"></a><span class="al">![Figure 31. altSEE8](./figs/altSEE8.png)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
