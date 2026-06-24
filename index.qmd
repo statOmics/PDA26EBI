@@ -1,5 +1,5 @@
 ---
-title: Proteomics Data Analysis for Data-dependent and Data-independent acquisition at EBI 2026 (PDA26EBI) 
+title: Proteomics Data Analysis for Data-dependent and Data-independent acquisition (PDA) 
 code-tools: false
 ---
 

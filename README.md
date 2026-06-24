@@ -1,9 +1,9 @@
-#  Proteomics Data Analysis for EBI 2026
+#  Proteomics Data Analysis 
 
 
-Course site for Proteomics Data Analysis for EBI 2026
+Course site for Proteomics Data Analysis
 
-https://statomics.github.io/PDA26EBI/
+https://statomics.github.io/PDA/
 
 
 ### Issues
