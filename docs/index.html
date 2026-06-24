@@ -207,8 +207,9 @@ div.csl-indent {
   <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
   <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing"><span class="header-section-number">1</span> Data Processing</a></li>
   <li><a href="#statistical-inference-design-concepts" id="toc-statistical-inference-design-concepts" class="nav-link" data-scroll-target="#statistical-inference-design-concepts"><span class="header-section-number">2</span> Statistical Inference &amp; Design concepts</a></li>
-  <li><a href="#targeted-audience-and-assumed-background" id="toc-targeted-audience-and-assumed-background" class="nav-link" data-scroll-target="#targeted-audience-and-assumed-background"><span class="header-section-number">3</span> Targeted audience and assumed background</a></li>
-  <li><a href="#software-and-data" id="toc-software-and-data" class="nav-link" data-scroll-target="#software-and-data"><span class="header-section-number">4</span> Software and data</a>
+  <li><a href="#vignettes" id="toc-vignettes" class="nav-link" data-scroll-target="#vignettes"><span class="header-section-number">3</span> Vignettes</a></li>
+  <li><a href="#targeted-audience-and-assumed-background" id="toc-targeted-audience-and-assumed-background" class="nav-link" data-scroll-target="#targeted-audience-and-assumed-background"><span class="header-section-number">4</span> Targeted audience and assumed background</a></li>
+  <li><a href="#software-and-data" id="toc-software-and-data" class="nav-link" data-scroll-target="#software-and-data"><span class="header-section-number">5</span> Software and data</a>
   <ul class="collapse">
   <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
   </ul></li>
@@ -296,8 +297,17 @@ The course first introduces general concepts of statistical proteomics data anal
 <li><a href="03-blocking-wrapup.html">Wrapup Blocking</a></li>
 </ul>
 </section>
-<section id="targeted-audience-and-assumed-background" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Targeted audience and assumed background</h1>
+<section id="vignettes" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Vignettes</h1>
+<ul>
+<li><a href="./staes-medianOfRatios-maxLFQ.html">Quarto script for DIA</a></li>
+<li><a href="./cptac.html">Quarto script for DDA</a></li>
+<li><a href="./staes248-GUI.html">Data analysis with msqrob2gui</a></li>
+</ul>
+<p>More example scripts for case-studies from various technologies, search engines and experimental designs can be found in our e-book: <a href="https://statomics.github.io/msqrob2book">msqrob2book</a></p>
+</section>
+<section id="targeted-audience-and-assumed-background" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Targeted audience and assumed background</h1>
 <p>The course material is targeted to either proteomics practitioners or data analysts/bioinformaticians that would like to learn how to analyse proteomics data.</p>
 <p>Familiarity with MS or proteomics in general is recommended, this would allow for a better understanding of the modelling assumptions taken throughout this course.</p>
 <p>The course is available in two different tracks.</p>
@@ -314,8 +324,8 @@ The course first introduces general concepts of statistical proteomics data anal
 <li><p>We <strong>highly recommend</strong> reading our msqrob2book for more in dept modeling concepts and case studies <a href="https://statomics.github.io/msqrob2book">msqrob2book</a>.</p></li>
 </ul>
 </section>
-<section id="software-and-data" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Software and data</h1>
+<section id="software-and-data" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Software and data</h1>
 <p>To install all the necessary package, please use <strong>R 4.6 or higher</strong> and execute the code chunk below in the RStudio Console/R console:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>

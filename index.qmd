@@ -65,6 +65,15 @@ This parts introduces the user to the key concepts for data processing in differ
 - [Tutorial Differential Analysis and Design Aspects](03-tutorial-Design.html)
 - [Wrapup Blocking](03-blocking-wrapup.html)
 
+# Vignettes 
+
+- [Quarto script for DIA](./staes-medianOfRatios-maxLFQ.html)
+- [Quarto script for DDA](./cptac.html)
+- [Data analysis with msqrob2gui](./staes248-GUI.html)
+
+More example scripts for case-studies from various technologies, search engines 
+and experimental designs can be found in our e-book: [msqrob2book](https://statomics.github.io/msqrob2book)
+
 # Targeted audience and assumed background
 
 The course material is targeted to either proteomics practitioners or
